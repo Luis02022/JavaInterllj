@@ -1,14 +1,15 @@
 package com.senai.aula.controller;
+
 import com.senai.aula.model.Usuario;
+import com.senai.aula.repository.UsuarioRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.senai.aula.repositoy.UsuarioRepository;
 
 import java.util.List;
 
-@RestController
 @RequestMapping("/usuario")
+@RestController
 public class UsuarioController {
     private UsuarioRepository usuarioRepository;
 
@@ -16,13 +17,14 @@ public class UsuarioController {
         this.usuarioRepository = usuarioRepository;
     }
 
+
     @GetMapping
-    public List<Usuario> listar() {
+    public List<Usuario> listarTodos(){
         return usuarioRepository.findAll();
     }
 
     @PostMapping
-    public ResponseEntity<Usuario> salvar(@RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> salvar(@RequestBody Usuario usuario){
         usuarioRepository.save(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
 
@@ -31,16 +33,17 @@ public class UsuarioController {
     @PutMapping
     public ResponseEntity<Usuario> atualizar(@RequestBody Usuario usuario){
         if (usuarioRepository.existsById(usuario.getId())){
-            usuarioRepository.save(usuario);
+          usuarioRepository.save(usuario);
         }
         return ResponseEntity.ok().body(usuario);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluir(@PathVariable Long id) {
+    public ResponseEntity<Void> deletar(@PathVariable Long id){
         usuarioRepository.deleteById(id);
         return ResponseEntity.noContent().build();
 
     }
+
 
 }

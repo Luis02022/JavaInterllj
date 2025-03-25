@@ -1,15 +1,15 @@
 package com.senai.aula.controller;
 
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping
 public class Welcome {
     @GetMapping
-    public String welcome() {
-        return "Bem-Vindo ao projeto: Aula.📚";
+    public String welcome(){
+        return "Bem-vindo mano!";
     }
-
 }
