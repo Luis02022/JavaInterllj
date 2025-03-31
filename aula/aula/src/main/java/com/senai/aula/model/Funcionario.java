@@ -1,5 +1,7 @@
 package com.senai.aula.model;
 
+import com.senai.aula.enu.Setor;
+import com.senai.aula.enu.Sexo;
 import jakarta.persistence.*;
 
 @Entity
@@ -7,32 +9,38 @@ import jakarta.persistence.*;
 public class Funcionario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
+    private Long id;
 
     @Column(nullable = false)
-    private String nome;
-    private String cpf;
-    private String rg;
-    private String matricula;
-    private String dataNascimento;
-    private double salario;
-    private String telefone;
-    private String email;
+    private String nome, cpf, rg, matricula,dataNascimento, telefone, email;
 
+    @Enumerated(EnumType.STRING)
+    private Sexo sexo;
+
+    @Enumerated(EnumType.STRING)
+    private Setor setor;
+
+    private double salario;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Endereco endereco;
 
     public Funcionario() {
     }
 
-    public Funcionario(Long id, String nome, String cpf, String rg, String matricula, String dataNascimento, double salario, String telefone, String email) {
+    public Funcionario(Long id, String nome, String cpf, String rg, String matricula, String dataNascimento, String telefone, String email, Sexo sexo, Setor setor, double salario, Endereco endereco) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.rg = rg;
         this.matricula = matricula;
         this.dataNascimento = dataNascimento;
-        this.salario = salario;
         this.telefone = telefone;
         this.email = email;
+        this.sexo = sexo;
+        this.setor = setor;
+        this.salario = salario;
+        this.endereco = endereco;
     }
 
     public Long getId() {
@@ -83,14 +91,6 @@ public class Funcionario {
         this.dataNascimento = dataNascimento;
     }
 
-    public double getSalario() {
-        return salario;
-    }
-
-    public void setSalario(double salario) {
-        this.salario = salario;
-    }
-
     public String getTelefone() {
         return telefone;
     }
@@ -107,6 +107,38 @@ public class Funcionario {
         this.email = email;
     }
 
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
+
+    public Setor getSetor() {
+        return setor;
+    }
+
+    public void setSetor(Setor setor) {
+        this.setor = setor;
+    }
+
+    public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
     @Override
     public String toString() {
         return "Funcionario{" +
@@ -116,10 +148,12 @@ public class Funcionario {
                 ", rg='" + rg + '\'' +
                 ", matricula='" + matricula + '\'' +
                 ", dataNascimento='" + dataNascimento + '\'' +
-                ", salario=" + salario +
                 ", telefone='" + telefone + '\'' +
                 ", email='" + email + '\'' +
+                ", sexo=" + sexo +
+                ", setor=" + setor +
+                ", salario=" + salario +
+                 endereco +
                 '}';
     }
 }
-

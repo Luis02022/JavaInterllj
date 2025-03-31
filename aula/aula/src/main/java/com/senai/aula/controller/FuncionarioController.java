@@ -18,7 +18,7 @@ public class FuncionarioController {
     }
 
     @GetMapping
-    public List<Funcionario> listartodos(){
+    public List<Funcionario> listarfuncionarios(){
         return funcionarioRepository.findAll();
     }
 
@@ -41,4 +41,5 @@ public class FuncionarioController {
         funcionarioRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
+
 }
